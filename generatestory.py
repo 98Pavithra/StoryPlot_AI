@@ -20,9 +20,15 @@ def generate_story_prompt(genre, theme, characters, setting, plot_elements):
 def generate_story(genre, theme, characters, setting, plot_elements):
     prompt = generate_story_prompt(genre, theme, characters, setting, plot_elements)
     response = openai.Completion.create(
-        engine="gpt-3.5-turbo-instruct",
+        engine="text-davinci-003",
         prompt=prompt,
-        max_tokens=600
+        max_tokens=600,
+        n=1,
+        stop=None,
+        temperature=0.7,
+        top_p=1,
+        frequency_penalty=0,
+        presence_penalty=0
     )
     generated_text = response.choices[0].text.strip()
 
